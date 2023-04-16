@@ -1,0 +1,49 @@
+@use "/src/styles/variables";
+
+main {
+  width: auto;
+  height: auto;
+  background-color: variables.$color-neutral-white;
+  margin: 0 auto;
+  border-radius: 1rem 1rem 5rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 2rem;
+  justify-content: center;
+}
+
+.input-form {
+  width: auto;
+}
+
+.division {
+  display: flex;
+  &__line {
+    border: none;
+    height: 2px;
+    width: 80%;
+    background-color: variables.$color-neutral-light-grey;
+    align-self: center;
+  }
+  &__action-button {
+    display: inline-block;
+    margin-left: 0.25rem;
+    width: 6rem;
+    height: 6rem;
+    border: none;
+    border-radius: 3rem;
+    background-color: variables.$color-primary-purple;
+    background-image: url(../assets/images/icon-arrow.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    &:hover {
+      background-color: variables.$color-neutral-off-black;
+      cursor: pointer;
+    }
+  }
+}
+
+.display-age {
+  width: auto;
+}

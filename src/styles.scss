@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@use "styles/reset.scss";
+@use "styles/fonts.scss";
+@use "styles/variables.scss";
+
+body {
+  font-family: Poppins, Fallback, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+
+  background-color: variables.$color-neutral-off-white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

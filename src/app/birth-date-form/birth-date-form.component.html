@@ -1,0 +1,89 @@
+<form class="form" [formGroup]="birthDateForm">
+  <div class="form__field">
+    <label
+      class="form__field__label"
+      [ngClass]="{
+        'invalid-text': isFormInvalid
+      }"
+      >Day</label
+    >
+    <input
+      class="form__field__input"
+      [ngClass]="{
+        'invalid-input': isFormInvalid
+      }"
+      placeholder="DD"
+      formControlName="dayField"
+      type="number"
+      (input)="updateValidation()"
+    />
+    <p
+      class="invalid-text error-text"
+      *ngIf="
+        birthDateForm.controls.dayField.touched &&
+        birthDateForm.controls.dayField.invalid
+      "
+    >
+      {{ getErrorMessage(0) }}
+    </p>
+  </div>
+
+  <div class="form__field">
+    <label
+      class="form__field__label"
+      [ngClass]="{
+        'invalid-text': isFormInvalid
+      }"
+      >Month</label
+    >
+    <input
+      class="form__field__input"
+      [ngClass]="{
+        'invalid-input': isFormInvalid
+      }"
+      placeholder="MM"
+      formControlName="monthField"
+      type="number"
+      (input)="updateValidation()"
+    />
+    <p
+      class="invalid-text error-text"
+      *ngIf="
+        birthDateForm.controls.monthField.touched &&
+        birthDateForm.controls.monthField.invalid
+      "
+    >
+      {{ getErrorMessage(1) }}
+    </p>
+  </div>
+
+  <div class="form__field">
+    <label
+      class="form__field__label"
+      [ngClass]="{
+        'invalid-text': isFormInvalid
+      }"
+      >Year</label
+    >
+    <input
+      class="form__field__input"
+      [ngClass]="{
+        'invalid-input': isFormInvalid
+      }"
+      placeholder="YYYY"
+      formControlName="yearField"
+      type="number"
+      (input)="updateValidation()"
+    />
+    <p
+      class="invalid-text error-text"
+      *ngIf="
+        birthDateForm.controls.yearField.touched &&
+        birthDateForm.controls.yearField.invalid
+      "
+    >
+      {{ getErrorMessage(2) }}
+    </p>
+  </div>
+  {{ birthDateForm.invalid }}
+</form>
