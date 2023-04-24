@@ -65,3 +65,34 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   appearance: textfield;
 }
+
+@media screen and (max-width: 799px) {
+  .form__field {
+    &__label {
+      font-size: 0.75rem;
+    }
+
+    &__input {
+      width: 8rem;
+
+      font-size: 2rem;
+    }
+  }
+  .error-text {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .form__field {
+    &__label {
+      font-size: 0.75rem;
+    }
+
+    &__input {
+      width: 5.25rem;
+      height: 3.5rem;
+      font-size: 1.25rem;
+    }
+  }
+}

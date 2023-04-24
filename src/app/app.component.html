@@ -2,7 +2,12 @@
   <app-birth-date-form class="input-form"></app-birth-date-form>
   <div class="division">
     <hr class="division__line" />
-    <button class="division__action-button" type="button"><i></i></button>
+    <button
+      class="division__action-button"
+      type="button"
+      (click)="calculateAge()"
+    ></button>
+    <hr class="division__line__end" />
   </div>
   <app-age-display class="display-age"></app-age-display>
 </main>

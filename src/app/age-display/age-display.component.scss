@@ -1,0 +1,33 @@
+@use "/src/styles/variables";
+
+.age-display {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__pair {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    font-size: 6rem;
+    font-weight: 800;
+    font-style: italic;
+  }
+
+  &__number {
+    color: variables.$color-primary-purple;
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .age-display__pair {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .age-display__pair {
+    font-size: 3rem;
+  }
+}

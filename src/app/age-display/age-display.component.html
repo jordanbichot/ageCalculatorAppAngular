@@ -1,1 +1,14 @@
-<p>age-display works!</p>
+<div class="age-display">
+  <div class="age-display__pair">
+    <p class="age-display__number">{{ yearsValue$ | async }}</p>
+    <p class="age-display__text">years</p>
+  </div>
+  <div class="age-display__pair">
+    <p class="age-display__number">{{ monthsValue$ | async }}</p>
+    <p class="age-display__text">months</p>
+  </div>
+  <div class="age-display__pair">
+    <p class="age-display__number">{{ daysValue$ | async }}</p>
+    <p class="age-display__text">days</p>
+  </div>
+</div>
