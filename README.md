@@ -43,7 +43,7 @@ Movile
 
 ### Useful resources
 
-- [ViewChild](https://angular.io/api/core/ViewChild) - This decorator can be used to access the child component from the parent componenent.
+- [ViewChild](https://angular.io/api/core/ViewChild) - This decorator can be used to access the child component from the parent component.
 
 ## Author
 
