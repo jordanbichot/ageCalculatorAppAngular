@@ -1,27 +1,54 @@
-# AgeCalculatorAppAngular
+# Frontend Mentor - Age calculator app solution
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
+This is a solution to the [Age calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/age-calculator-app-dF9DFFpj-Q). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Development server
+## Table of contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Overview](#overview)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-## Code scaffolding
+## Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Screenshot
 
-## Build
+Desktop
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![](./screenshots/desktop-image.png)
 
-## Running unit tests
+Movile
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![](./screenshots/mobile-image.png)
 
-## Running end-to-end tests
+### Links
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Solution URL: [GitHub Solution](https://github.com/jordanbichot/ageCalculatorAppAngular.git)
+- Live Site URL: [Live Site](https://jordanbichot.github.io/ageCalculatorAppAngular/)
 
-## Further help
+## My process
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Angular](https://angular.io/) - Angular framework
+- Angular Reactive Forms
+
+### Useful resources
+
+- [ViewChild](https://angular.io/api/core/ViewChild) - This decorator can be used to access the child component from the parent componenent.
+
+## Author
+
+- Jordan Miguel Bichot Pérez - [FinTech Samurais](https://fintechsamurais.com/)
+- Frontend Mentor - [@JordanBichot](https://www.frontendmentor.io/profile/JordanBichot)
+- GitHub - [@jordanbichot](https://github.com/jordanbichot)
+- LinkedIn - [Jordan Miguel Bichot Pérez](https://www.linkedin.com/in/jordan-miguel-bichot-p%C3%A9rez-613172225)
+- Twitter - [@BichotJordan](https://twitter.com/BichotJordan?t=lu5q3WUeYHh3oWaySHXjIg&s=09)
