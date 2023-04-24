@@ -35,14 +35,22 @@ main {
     width: 100%;
     background-color: variables.$color-neutral-light-grey;
     align-self: center;
+    &__end {
+      border: none;
+      height: 2px;
+      width: 0%;
+      background-color: variables.$color-neutral-light-grey;
+      align-self: center;
+    }
   }
   &__action-button {
     display: inline-block;
     margin-left: 0.25rem;
     width: 5rem;
     height: 5rem;
+    aspect-ratio: 1;
     border: solid variables.$color-neutral-white;
-    border-radius: 5rem;
+    border-radius: 50%;
     background-color: variables.$color-primary-purple;
     background-image: url(../assets/images/icon-arrow.svg);
     background-repeat: no-repeat;
@@ -61,3 +69,26 @@ main {
   grid-row-end: 4;
   width: auto;
 }
+
+@media screen and (max-width: 1000px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .division {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    padding-right: 0;
+    &__line {
+      width: 50%;
+      &__end {
+        width: 50%;
+      }
+    }
+    &__action-button {
+      margin-left: 0;
+    }
+  }
+}
+@
