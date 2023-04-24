@@ -20,9 +20,9 @@
 
     &__input {
       border: 2px solid variables.$color-neutral-light-grey;
-      width: 20rem;
-      height: 8rem;
-      padding-left: 2rem;
+      width: 12rem;
+      height: 5rem;
+      padding-left: 1rem;
       border-radius: 0.5rem;
 
       caret-color: variables.$color-primary-purple;
@@ -52,6 +52,7 @@
 .error-text {
   color: variables.$color-primary-light-red;
   font-style: italic;
+  font-size: 1rem;
 }
 
 /* Chrome, Safari, Edge, Opera */

@@ -4,7 +4,7 @@ export function monthValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 
-    if (value === '') {
+    if (value === '' || value === null) {
       return null;
     }
 
