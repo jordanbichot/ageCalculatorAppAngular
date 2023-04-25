@@ -3,14 +3,14 @@
     <label
       class="form__field__label"
       [ngClass]="{
-        'invalid-text': isFormInvalid
+        'invalid-text': isFormInvalid | async
       }"
       >Day</label
     >
     <input
       class="form__field__input"
       [ngClass]="{
-        'invalid-input': isFormInvalid
+        'invalid-input': isFormInvalid | async
       }"
       placeholder="DD"
       formControlName="dayField"
@@ -18,13 +18,13 @@
       (input)="updateValidation()"
     />
     <p
-      class="invalid-text error-text"
+      class="error-text"
       *ngIf="
         birthDateForm.controls.dayField.touched &&
         birthDateForm.controls.dayField.invalid || birthDateForm.errors?.['invalidDate']
       "
     >
-      {{ getErrorMessage(0) }}
+      {{ getErrorMessage("days") }}
     </p>
   </div>
 
@@ -32,14 +32,14 @@
     <label
       class="form__field__label"
       [ngClass]="{
-        'invalid-text': isFormInvalid
+        'invalid-text': isFormInvalid | async
       }"
       >Month</label
     >
     <input
       class="form__field__input"
       [ngClass]="{
-        'invalid-input': isFormInvalid
+        'invalid-input': isFormInvalid | async
       }"
       placeholder="MM"
       formControlName="monthField"
@@ -47,13 +47,13 @@
       (input)="updateValidation()"
     />
     <p
-      class="invalid-text error-text"
+      class="error-text"
       *ngIf="
         birthDateForm.controls.monthField.touched &&
         birthDateForm.controls.monthField.invalid
       "
     >
-      {{ getErrorMessage(1) }}
+      {{ getErrorMessage("months") }}
     </p>
   </div>
 
@@ -61,14 +61,14 @@
     <label
       class="form__field__label"
       [ngClass]="{
-        'invalid-text': isFormInvalid
+        'invalid-text': isFormInvalid | async
       }"
       >Year</label
     >
     <input
       class="form__field__input"
       [ngClass]="{
-        'invalid-input': isFormInvalid
+        'invalid-input': isFormInvalid | async
       }"
       placeholder="YYYY"
       formControlName="yearField"
@@ -76,13 +76,13 @@
       (input)="updateValidation()"
     />
     <p
-      class="invalid-text error-text"
+      class="error-text"
       *ngIf="
         birthDateForm.controls.yearField.touched &&
         birthDateForm.controls.yearField.invalid
       "
     >
-      {{ getErrorMessage(2) }}
+      {{ getErrorMessage("years") }}
     </p>
   </div>
 </form>

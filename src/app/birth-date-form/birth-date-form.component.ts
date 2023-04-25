@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,18 +10,16 @@ import { monthValidator } from './validators/month-validator';
 import { yearValidator } from './validators/year-validator';
 import { dateValidator } from './validators/date-validator';
 import { BirthDateHandlerService } from './data-access/birth-date-handler.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-birth-date-form',
   templateUrl: './birth-date-form.component.html',
   styleUrls: ['./birth-date-form.component.scss'],
 })
-export class BirthDateFormComponent {
+export class BirthDateFormComponent implements OnInit, OnDestroy {
+  private buttonClickSubscription = new Subscription();
   public requiredErrorMessage: string = 'This field is required';
-  public dayValue: number = 0;
-  public monthValue: number = 0;
-  public yearValue: number = 0;
-  public yearErrorMessage: string = '';
   public birthDateForm = new FormGroup(
     {
       dayField: new FormControl('', [Validators.required, dayValidator()]),
@@ -30,15 +28,29 @@ export class BirthDateFormComponent {
     },
     dateValidator()
   );
-  public isFormInvalid: boolean = false;
+  public isFormInvalid = this.birthDateHandlerService.isFormInvalid$;
+  private currentIsFormInvalid: boolean = false;
 
   constructor(private birthDateHandlerService: BirthDateHandlerService) {}
 
-  public getErrorMessage(index: number) {
+  ngOnInit(): void {
+    this.buttonClickSubscription =
+      this.birthDateHandlerService.buttonClickEventSubject.subscribe(
+        (event) => {
+          this.touchAll();
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.buttonClickSubscription.unsubscribe();
+  }
+
+  public getErrorMessage(field: string) {
     let error: string;
-    index === 0
+    field === 'days'
       ? (error = this.getErrorMessageForDays())
-      : index === 1
+      : field === 'months'
       ? (error = this.getErrorMessageForMonths())
       : (error = this.getErrorMessageForYears());
 
@@ -46,8 +58,8 @@ export class BirthDateFormComponent {
   }
 
   private getErrorMessageForDays() {
-    let form = this.birthDateForm;
-    let dayControl = form.controls.dayField;
+    const form = this.birthDateForm;
+    const dayControl = form.controls.dayField;
     let error: string;
     error = dayControl.errors?.['invalidDay']
       ? dayControl.errors?.['message']
@@ -59,7 +71,7 @@ export class BirthDateFormComponent {
     return error;
   }
   private getErrorMessageForMonths() {
-    let monthControl = this.birthDateForm.controls.monthField;
+    const monthControl = this.birthDateForm.controls.monthField;
     let error: string;
     error = monthControl.errors?.['invalidMonth']
       ? monthControl.errors?.['message']
@@ -69,7 +81,7 @@ export class BirthDateFormComponent {
     return error;
   }
   private getErrorMessageForYears() {
-    let yearControl = this.birthDateForm.controls.yearField;
+    const yearControl = this.birthDateForm.controls.yearField;
     let error: string;
     error = yearControl.errors?.['invalidYear']
       ? yearControl.errors?.['message']
@@ -80,33 +92,51 @@ export class BirthDateFormComponent {
   }
 
   public updateValidation() {
-    let fields = this.birthDateForm.controls;
+    if (this.isFormValid() && this.isAllFieldsDirty()) {
+      this.birthDateHandlerService.dayCurrentValue =
+        this.birthDateForm.controls.dayField.value!;
+      this.birthDateHandlerService.monthCurrentValue =
+        this.birthDateForm.controls.monthField.value!;
+      this.birthDateHandlerService.yearCurrentValue =
+        this.birthDateForm.controls.yearField.value!;
 
-    let allTouched =
-      fields.dayField.touched &&
-      fields.monthField.touched &&
-      fields.yearField.touched;
-
-    this.isFormInvalid =
-      (fields.dayField.touched && fields.dayField.invalid) ||
-      (fields.monthField.touched && fields.monthField.invalid) ||
-      (fields.yearField.touched && fields.yearField.invalid) ||
-      (allTouched && this.birthDateForm.invalid);
-
-    this.birthDateHandlerService.isFormValid = !this.isFormInvalid;
-
-    if (!this.isFormInvalid) {
-      this.birthDateHandlerService.dayCurrentValue = fields.dayField.value!;
-      this.birthDateHandlerService.monthCurrentValue = fields.monthField.value!;
-      this.birthDateHandlerService.yearCurrentValue = fields.yearField.value!;
+      this.birthDateHandlerService.isFormCompleted = true;
+    } else {
+      this.birthDateHandlerService.isFormCompleted = false;
     }
   }
 
-  public touchAll() {
-    let fields = this.birthDateForm.controls;
-    fields.dayField.markAsTouched();
-    fields.monthField.markAsTouched();
-    fields.yearField.markAsTouched();
+  private touchAll() {
+    this.birthDateForm.markAllAsTouched();
     this.updateValidation();
+  }
+
+  private isAllFieldsDirty() {
+    return (
+      this.birthDateForm.controls.dayField.dirty &&
+      this.birthDateForm.controls.monthField.dirty &&
+      this.birthDateForm.controls.yearField.dirty
+    );
+  }
+
+  private isFormValid() {
+    const days = this.birthDateForm.controls.dayField;
+    const months = this.birthDateForm.controls.monthField;
+    const years = this.birthDateForm.controls.yearField;
+
+    const isAllFieldsTouched = days.touched && months.touched && years.touched;
+
+    const isFormInvalid =
+      (days.touched && days.invalid) ||
+      (months.touched && months.invalid) ||
+      (years.touched && years.invalid) ||
+      (isAllFieldsTouched && this.birthDateForm.invalid);
+
+    if (isFormInvalid !== this.currentIsFormInvalid) {
+      this.currentIsFormInvalid = isFormInvalid;
+      this.birthDateHandlerService.updateValidity(isFormInvalid);
+    }
+
+    return !isFormInvalid;
   }
 }

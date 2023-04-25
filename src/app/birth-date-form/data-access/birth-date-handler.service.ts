@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +12,16 @@ export class BirthDateHandlerService {
   private yearsValue = new BehaviorSubject<string>('- -');
   public yearsValue$ = this.yearsValue.asObservable();
 
+  private isFormInvalid = new BehaviorSubject<boolean>(false);
+  public isFormInvalid$ = this.isFormInvalid.asObservable();
+
+  public isFormCompleted: boolean = false;
+
   public dayCurrentValue = '';
   public monthCurrentValue = '';
   public yearCurrentValue = '';
 
-  public isFormValid = false;
+  public buttonClickEventSubject = new Subject();
 
   constructor() {}
 
@@ -30,16 +35,24 @@ export class BirthDateHandlerService {
     this.yearsValue.next(newYearsValue);
   }
 
-  public updateValues() {
-    let maxDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let todayDate = new Date();
-    let initialDay = Number.parseInt(this.dayCurrentValue);
-    let initialMonth = Number.parseInt(this.monthCurrentValue);
-    let initialYear = Number.parseInt(this.yearCurrentValue);
+  public emitButtonEvent() {
+    this.buttonClickEventSubject.next('Button Clicked');
+  }
 
-    let endDay = todayDate.getDate();
-    let endMonth = todayDate.getMonth() + 1;
-    let endYear = todayDate.getFullYear();
+  public updateValidity(isFormStatusInvalid: boolean) {
+    this.isFormInvalid.next(isFormStatusInvalid);
+  }
+
+  public updateValues() {
+    const maxDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const todayDate = new Date();
+    const initialDay = Number.parseInt(this.dayCurrentValue);
+    const initialMonth = Number.parseInt(this.monthCurrentValue);
+    const initialYear = Number.parseInt(this.yearCurrentValue);
+
+    const endDay = todayDate.getDate();
+    const endMonth = todayDate.getMonth() + 1;
+    const endYear = todayDate.getFullYear();
 
     let yearsDifference = endYear - initialYear;
     let monthsDifference = endMonth - initialMonth;
