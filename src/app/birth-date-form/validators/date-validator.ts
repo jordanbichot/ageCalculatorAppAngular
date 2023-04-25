@@ -11,33 +11,25 @@ export function dateValidator(): ValidatorFn {
     const dayControl = control.get('dayField');
     const monthControl = control.get('monthField');
     const yearControl = control.get('yearField');
-    let maxDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const maxDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    let allDirty =
+    const isAllDirty =
       dayControl?.dirty && monthControl?.dirty && yearControl?.dirty;
 
-    if (!allDirty) {
+    if (!isAllDirty) {
       return null;
     }
 
-    let invalidDate = false;
-    let errorMessage = '';
-
     if (isLeapYear(yearControl?.value)) maxDaysPerMonth[1] = 29;
 
-    if (
-      !DoesMonthValueHasValueDays(
-        monthControl?.value,
-        dayControl?.value,
-        maxDaysPerMonth
-      )
-    ) {
-      invalidDate = true;
-      errorMessage = 'Must be a valid date';
-    }
+    const isInvalidDate = !DoesMonthValueHasValueDays(
+      monthControl?.value,
+      dayControl?.value,
+      maxDaysPerMonth
+    );
 
-    return invalidDate
-      ? { invalidDate: invalidDate, message: errorMessage }
+    return isInvalidDate
+      ? { invalidDate: isInvalidDate, message: 'Must be a valid date' }
       : null;
   };
 }

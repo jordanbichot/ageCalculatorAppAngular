@@ -12,18 +12,12 @@ export function dayValidator(): ValidatorFn {
     if (dayValue === '' || dayValue === null) {
       return null;
     }
-    let invalidDay = false;
-    let errorMessage = '';
+    const isInvalidDay = dayValue > 31 || dayValue <= 0;
 
-    if (dayValue > 31 || dayValue <= 0) {
-      invalidDay = true;
-      errorMessage = 'Must be a valid day';
-    }
-
-    return invalidDay
+    return isInvalidDay
       ? {
-          invalidDay: invalidDay,
-          message: errorMessage,
+          invalidDay: isInvalidDay,
+          message: 'Must be a valid day',
         }
       : null;
   };

@@ -2,14 +2,16 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function monthValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
+    const monthValue = control.value;
 
-    if (value === '' || value === null) {
+    if (monthValue === '' || monthValue === null) {
       return null;
     }
 
-    return value > 0 && value <= 12
-      ? null
-      : { invalidMonth: true, message: 'Must be a valid month' };
+    const isInvalidMonth = monthValue <= 0 || monthValue > 12;
+
+    return isInvalidMonth
+      ? { invalidMonth: isInvalidMonth, message: 'Must be a valid month' }
+      : null;
   };
 }

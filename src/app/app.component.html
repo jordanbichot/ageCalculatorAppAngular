@@ -1,8 +1,9 @@
 <main>
-  <app-birth-date-form class="input-form"></app-birth-date-form>
+  <app-birth-date-form class="input-form" aria-level="1"></app-birth-date-form>
   <div class="division">
     <hr class="division__line" />
     <button
+      aria-label="action-button"
       class="division__action-button"
       type="button"
       (click)="calculateAge()"

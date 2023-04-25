@@ -8,16 +8,15 @@ import { BirthDateFormComponent } from './birth-date-form/birth-date-form.compon
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild(BirthDateFormComponent)
   birthDateFormComponent!: BirthDateFormComponent;
 
   constructor(private birthDateHandlerService: BirthDateHandlerService) {}
 
   public calculateAge() {
-    if (this.birthDateHandlerService.isFormValid) {
+    if (this.birthDateHandlerService.isFormCompleted) {
       this.birthDateHandlerService.updateValues();
     } else {
-      this.birthDateFormComponent.touchAll();
+      this.birthDateHandlerService.emitButtonEvent();
       this.birthDateHandlerService.changeDays('- -');
       this.birthDateHandlerService.changeMonths('- -');
       this.birthDateHandlerService.changeYears('- -');
